@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'com.alibaba.arouter'
+//apply plugin: 'com.tencent.tinker.patch'//热修复
+
+android {
+    compileSdkVersion compile_sdk_version.toInteger()
+    defaultConfig {
+        applicationId "com.ydw.multicomponent"
+        minSdkVersion min_sdk_version.toInteger()
+        targetSdkVersion target_sdt_version.toInteger()
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+
+}
+
+kapt {
+
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation project(':base')
+    implementation project(':login')
+    //ARouter
+    implementation 'com.alibaba:arouter-api:1.4.1'
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+    implementation 'com.android.support:multidex:1.0.3'
+    //热修复
+    implementation('com.tencent.tinker:tinker-android-lib:1.7.7') { changing = true }
+    //可选，用于生成application类
+    //provided('com.tencent.tinker:tinker-android-anno:1.7.7'){ changing = true }
+    //Lifecycle
+    implementation 'android.arch.lifecycle:runtime:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    //日志打印
+    implementation 'com.orhanobut:logger:2.2.0'
+
+}
+
