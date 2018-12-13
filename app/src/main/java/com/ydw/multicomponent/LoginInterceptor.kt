@@ -18,7 +18,7 @@ class LoginInterceptor: IInterceptor{
     }
 
     override fun process(postcard: Postcard, callback: InterceptorCallback) {
-        Logger.d(LogTag.APP,"进行了拦截")
+        Logger.t(LogTag.AppTag_App).i("进行了拦截")
         callback.onContinue(postcard)  // 处理完成，交还控制权
 
     }

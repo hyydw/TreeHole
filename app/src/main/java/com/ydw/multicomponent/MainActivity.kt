@@ -18,19 +18,11 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Logger.d(LogTag.APP,"MainActivity_onCreate")
+        Logger.t(LogTag.AppTag_App).d("MainActivity_onCreate")
     }
 
     override fun onResume() {
         super.onResume()
-        val intent = Intent()
-        intent.setClass(this, LoginActivity::class.java)
-        val handler = Handler()
-        val runnable = Runnable {
-            ARouter.getInstance().build(ARouterPath.ACTIVITY_URL_LOGIN).navigation()
 
-            //this.startActivity(intent)
-        }
-        handler.postDelayed(runnable,3000)
     }
 }

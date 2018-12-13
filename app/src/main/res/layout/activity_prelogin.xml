@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
-
-    <TextView
-            android:text="启动页面"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/textView"
-            android:gravity="center"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+            android:background="#d8f9ef">
+    <com.ydw.base.viewCtrls.pathAnimatorCtrl.AsyncTextPathView
+        android:id="@+id/asyncText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:duration="4000"
+        app:showPainter="true"
+        app:text="树洞"
+        app:pathStrokeColor="#7595af"
+        app:textInCenter="true"
+        app:textSize="120sp"
+        android:layout_centerInParent="true"
     />
-</LinearLayout>
+
+
+</RelativeLayout>
